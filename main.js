@@ -175,7 +175,7 @@ const checkInputs = () => {
     $(".channel").each(function() {
         const id = $(this).attr("id");
         if (visibleChannels.includes(id.substring(0, id.length - "-selector".length))) {
-            $(this).css("display", "block");
+            $(this).css("display", "grid");
         } else {
             $(this).css("display", "none");
         }

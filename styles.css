@@ -3,29 +3,38 @@ body {
 }
 
 .selector {
-    margin: 20px 0 20px 20px;
+    display: grid;
+    margin: 20px 0 0 0;
+    grid-template-columns: 6fr 3fr 3fr 24fr;
+    grid-gap: 20px;
+    min-width: 1200px;
 }
 
-#input-level {
-    position: fixed;
-    left: 250px;
+.selector label {
+    margin: 0;
 }
 
-.dropdown {
-    position: fixed;
-    left: 250px;
+.selector select {
+    margin: 0;
 }
 
-.attribute-label {
-    margin-top: 0;
-    position: fixed;
-    left: 375px;
+.selector p {
+    margin: 0;
 }
 
-.attribute-name {
-    position: fixed;
-    left: 475px;
-    width: 800px;
+.selector input {
+    margin: 0;
+}
+
+.button {
+    margin: 20px 0 0 0;
+    width: 100%;
+}
+
+.button input {
+    width: 50%;
+    margin: 0;
+    min-width: 300px;
 }
 
 td {
