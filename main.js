@@ -148,7 +148,9 @@ const generateTable = (visibleChannels) => {
 
     $(".channel").slice(0, 8).each(handleChannel);
 
-    attemptEncodeConstant("local layout", "Local Layout", $("#dropdown-local-layout").val());
+    if (markTypeOption === "point") {
+        attemptEncodeConstant("local layout", "Local Layout", $("#dropdown-local-layout").val());
+    }
 
     $(".channel").slice(8).each(handleChannel);
 };
