@@ -58,33 +58,12 @@
             </select>
         </div>
         
-        <div class="selector channel" id="height-selector">
-            <label for="height">Height</label>
-            <select class="dropdown" name="height" id="dropdown-height">
-                <option value="unselected" selected="selected">Unselected</option>
-                <option value="encoding">Encoding</option>
-                <option value="uniform">Uniform</option>
-            </select>
-            <p class="attribute-label">Attribute(s):</p>
-            <input class="attribute-name" type="text" maxlength="80" name="channel-height">
-        </div>
-        
-        <div class="selector channel" id="width-selector">
-            <label for="width">Width</label>
-            <select class="dropdown" name="width" id="dropdown-width">
-                <option value="unselected" selected="selected">Unselected</option>
-                <option value="encoding">Encoding</option>
-                <option value="uniform">Uniform</option>
-            </select>
-            <p class="attribute-label">Attribute(s):</p>
-            <input class="attribute-name" type="text" maxlength="80" name="channel-width">
-        </div>
-        
         <div class="selector channel" id="horizontal-position-order-selector">
-            <label for="horizontal-position-order">Horizontal Position & Order</label>
+            <label for="horizontal-position-order">- Horizontal Position & Order</label>
             <select class="dropdown" name="horizontal-position-order" id="dropdown-horizontal-position-order">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -92,10 +71,11 @@
         </div>
         
         <div class="selector channel" id="horizontal-order-selector">
-            <label for="horizontal-order">Horizontal Order (only)</label>
+            <label for="horizontal-order">- Horizontal Order (only)</label>
             <select class="dropdown" name="horizontal-order" id="dropdown-horizontal-order">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -103,10 +83,11 @@
         </div>
         
         <div class="selector channel" id="vertical-position-order-selector">
-            <label for="vertical-position-order">Vertical Position & Order</label>
+            <label for="vertical-position-order">- Vertical Position & Order</label>
             <select class="dropdown" name="vertical-position-order" id="dropdown-vertical-position-order">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -114,43 +95,23 @@
         </div>
         
         <div class="selector channel" id="vertical-order-selector">
-            <label for="vertical-order">Vertical Order (only)</label>
+            <label for="vertical-order">- Vertical Order (only)</label>
             <select class="dropdown" name="vertical-order" id="dropdown-vertical-order">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
             <input class="attribute-name" type="text" maxlength="80" name="channel-vertical-order">
         </div>
         
-        <div class="selector channel" id="spread-selector">
-            <label for="spread">Spread</label>
-            <select class="dropdown" name="spread" id="dropdown-spread">
-                <option value="unselected" selected="selected">Unselected</option>
-                <option value="encoding">Encoding</option>
-                <option value="uniform">Uniform</option>
-            </select>
-            <p class="attribute-label">Attribute(s):</p>
-            <input class="attribute-name" type="text" maxlength="80" name="channel-spread">
-        </div>
-        
-        <div class="selector channel" id="span-selector">
-            <label for="span">Span</label>
-            <select class="dropdown" name="span" id="dropdown-span">
-                <option value="unselected" selected="selected">Unselected</option>
-                <option value="encoding">Encoding</option>
-                <option value="uniform">Uniform</option>
-            </select>
-            <p class="attribute-label">Attribute(s):</p>
-            <input class="attribute-name" type="text" maxlength="80" name="channel-span">
-        </div>
-        
         <div class="selector channel" id="radial-position-order-selector">
-            <label for="radial-position-order">Radial Position & Order</label>
+            <label for="radial-position-order">- Radial Position & Order</label>
             <select class="dropdown" name="radial-position-order" id="dropdown-radial-position-order">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -158,10 +119,11 @@
         </div>
         
         <div class="selector channel" id="radial-order-selector">
-            <label for="radial-order">Radial Order (only)</label>
+            <label for="radial-order">- Radial Order (only)</label>
             <select class="dropdown" name="radial-order" id="dropdown-radial-order">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -169,10 +131,11 @@
         </div>
         
         <div class="selector channel" id="angular-position-order-selector">
-            <label for="angular-position-order">Angular Position & Order</label>
+            <label for="angular-position-order">- Angular Position & Order</label>
             <select class="dropdown" name="angular-position-order" id="dropdown-angular-position-order">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -180,21 +143,81 @@
         </div>
         
         <div class="selector channel" id="angular-order-selector">
-            <label for="angular-order">Angular Order (only)</label>
+            <label for="angular-order">- Angular Order (only)</label>
             <select class="dropdown" name="angular-order" id="dropdown-angular-order">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
             <input class="attribute-name" type="text" maxlength="80" name="channel-angular-order">
         </div>
         
+        <div class="selector" id="local-layout-selector">
+            <label for="local-layout">Local Layout</label>
+            <select class="dropdown" name="local-layout" id="dropdown-local-layout">
+                <option value="unselected" selected="selected">Unselected</option>
+                <option value="rectilinear">Rectilinear</option>
+                <option value="polar">Polar</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        
+        <div class="selector channel" id="height-selector">
+            <label for="height">- Height</label>
+            <select class="dropdown" name="height" id="dropdown-height">
+                <option value="unselected" selected="selected">Unselected</option>
+                <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
+                <option value="uniform">Uniform</option>
+            </select>
+            <p class="attribute-label">Attribute(s):</p>
+            <input class="attribute-name" type="text" maxlength="80" name="channel-height">
+        </div>
+        
+        <div class="selector channel" id="width-selector">
+            <label for="width">- Width</label>
+            <select class="dropdown" name="width" id="dropdown-width">
+                <option value="unselected" selected="selected">Unselected</option>
+                <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
+                <option value="uniform">Uniform</option>
+            </select>
+            <p class="attribute-label">Attribute(s):</p>
+            <input class="attribute-name" type="text" maxlength="80" name="channel-width">
+        </div>
+        
+        <div class="selector channel" id="spread-selector">
+            <label for="spread">- Spread</label>
+            <select class="dropdown" name="spread" id="dropdown-spread">
+                <option value="unselected" selected="selected">Unselected</option>
+                <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
+                <option value="uniform">Uniform</option>
+            </select>
+            <p class="attribute-label">Attribute(s):</p>
+            <input class="attribute-name" type="text" maxlength="80" name="channel-spread">
+        </div>
+        
+        <div class="selector channel" id="span-selector">
+            <label for="span">- Span</label>
+            <select class="dropdown" name="span" id="dropdown-span">
+                <option value="unselected" selected="selected">Unselected</option>
+                <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
+                <option value="uniform">Uniform</option>
+            </select>
+            <p class="attribute-label">Attribute(s):</p>
+            <input class="attribute-name" type="text" maxlength="80" name="channel-span">
+        </div>
+        
         <div class="selector channel" id="orientation-selector">
-            <label for="orientation">Orientation</label>
+            <label for="orientation">- Orientation</label>
             <select class="dropdown" name="orientation" id="dropdown-orientation">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -206,6 +229,7 @@
             <select class="dropdown" name="shape" id="dropdown-shape">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -217,6 +241,7 @@
             <select class="dropdown" name="thickness" id="dropdown-thickness">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -228,6 +253,7 @@
             <select class="dropdown" name="area" id="dropdown-area">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
@@ -239,10 +265,23 @@
             <select class="dropdown" name="colour" id="dropdown-colour">
                 <option value="unselected" selected="selected">Unselected</option>
                 <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
                 <option value="uniform">Uniform</option>
             </select>
             <p class="attribute-label">Attribute(s):</p>
             <input class="attribute-name" type="text" maxlength="80" name="channel-colour">
+        </div>
+        
+        <div class="selector channel" id="symbol-selector">
+            <label for="symbol">Symbol</label>
+            <select class="dropdown" name="symbol" id="dropdown-symbol">
+                <option value="unselected" selected="selected">Unselected</option>
+                <option value="encoding">Encoding</option>
+                <option value="inherited">Inherited</option>
+                <option value="uniform">Uniform</option>
+            </select>
+            <p class="attribute-label">Attribute(s):</p>
+            <input class="attribute-name" type="text" maxlength="80" name="channel-symbol">
         </div>
 
         

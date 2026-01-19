@@ -29,19 +29,20 @@ const setInputs = () => {
     const values = decodeURIComponent(url.searchParams.get("value")).split(/\-(?![^(]*\))/);
     
     const binaryMap = { "u": "unselected", "y": "yes", "n": "no" };
-    const globalLayoutMap = { "u": "unselected", "r": "rectilinear", "p": "polar", "o": "other" };
+    const layoutMap = { "u": "unselected", "r": "rectilinear", "p": "polar", "o": "other" };
     const markTypeMap = { "s": "unselected", "i": "point", "t": "path", "l": "poly" };
-    const channelMap = { "s": "unselected", "c": "encoding", "i": "uniform" };
+    const channelMap = { "s": "unselected", "c": "encoding", "h": "inherited", "i": "uniform" };
 
     $("#input-level").val(values[0]);
     $("#dropdown-touching").val(binaryMap[values[1]]);
     $("#dropdown-overlapping").val(binaryMap[values[2]]);
-    $("#dropdown-global-layout").val(globalLayoutMap[values[3]]);
-    $("#dropdown-mark-type").val(markTypeMap[values[4]]);
+    $("#dropdown-global-layout").val(layoutMap[values[3]]);
+    $("#dropdown-local-layout").val(layoutMap[values[4]]);
+    $("#dropdown-mark-type").val(markTypeMap[values[5]]);
     $(".channel").each(function(index) {
-        $($(this).children()[1]).val(channelMap[values[5 + index].substring(0, 1)]);
-        if (values[5 + index].length > 1) {
-            $($(this).children()[3]).val(values[5 + index].substring(2, values[5 + index].length - 1));
+        $($(this).children()[1]).val(channelMap[values[6 + index].substring(0, 1)]);
+        if (values[6 + index].length > 1) {
+            $($(this).children()[3]).val(values[6 + index].substring(2, values[6 + index].length - 1));
         } else {
             $($(this).children()[3]).val("");    
         }
@@ -55,6 +56,7 @@ const generateCode = (visibleChannels) => {
     code += $("#dropdown-touching").val().substring(0, 1) + "-";
     code += $("#dropdown-overlapping").val().substring(0, 1) + "-";
     code += $("#dropdown-global-layout").val().substring(0, 1) + "-";
+    code += $("#dropdown-local-layout").val().substring(0, 1) + "-";
     code += $("#dropdown-mark-type").val().substring(2, 3);
     $(".channel").each(function() {
         const channel = $(this).attr("id").substring(0, $(this).attr("id").length - "-selector".length);
@@ -81,6 +83,7 @@ const generateTable = (visibleChannels) => {
         "touching": "#8dd3c7",
         "overlapping": "#8dd3c7",
         "global layout": "#aaaaaa",
+        "local layout": "#aaaaaa",
         "height": "#80b1d3",
         "width": "#80b1d3",
         "horizontal-position-order": "#80b1d3",
@@ -97,47 +100,57 @@ const generateTable = (visibleChannels) => {
         "shape": "#fccde5",
         "thickness": "#d9d9d9",
         "area": "#bc80bd",
-        "colour": "#ffed6f"
+        "colour": "#ffed6f",
+        "symbol": "#ffed6f",
     };
 
     ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
     
-    const attemptEncodeConstant = (encodeName, value) => {
+    const attemptEncodeConstant = (encodeName, niceEncodeName, value) => {
         if (value === "unselected") {
-            throw Error(encodeName + " is unselected");
+            throw Error(niceEncodeName + " is unselected");
         } else {
-            table.append(`<tr><td style="background-color: ${colourMap[encodeName]}">${encodeName}</td><td style="background-color: ${colourMap[encodeName]}">${value}</td></tr>`);
+            table.append(`<tr><td style="background-color: ${colourMap[encodeName]}">${niceEncodeName}</td><td style="background-color: ${colourMap[encodeName]}">${value}</td></tr>`);
         }
     };
 
-    attemptEncodeConstant("level", $("#input-level").val());
+    attemptEncodeConstant("level", "Level", $("#input-level").val());
 
     const markTypeOption = $("#dropdown-mark-type").val();
     if (markTypeOption === "unselected") {
         throw Error("mark type is unselected");
     } else {
-        table.append(`<tr><td style="background-color: ${colourMap["mark type"]}">mark type</td><td style="background-color: ${colourMap["mark type"]}">${markTypeOption}</td></tr>`);
+        table.append(`<tr><td style="background-color: ${colourMap["mark type"]}">Mark Type</td><td style="background-color: ${colourMap["mark type"]}">${markTypeOption}</td></tr>`);
     }
-    attemptEncodeConstant("touching", $("#dropdown-touching").val());
-    attemptEncodeConstant("overlapping", $("#dropdown-overlapping").val());
-    attemptEncodeConstant("global layout", $("#dropdown-global-layout").val());
+    attemptEncodeConstant("touching", "Touching?", $("#dropdown-touching").val());
+    attemptEncodeConstant("overlapping", "Overlapping?", $("#dropdown-overlapping").val());
+    attemptEncodeConstant("global layout", "Global Layout", $("#dropdown-global-layout").val());
 
-    const attemptEncodeChannel = (channel, value, attribute) => {
+    const attemptEncodeChannel = (channel, niceChannel, value, attribute) => {
+        const trimmedNiceChannel = niceChannel.slice(0, 2) === "- " ? niceChannel.slice(2) : niceChannel; 
         if (value === "unselected") {
-            throw Error(channel + " is unselected");
+            throw Error(trimmedNiceChannel + " is unselected");
         } else if (value === "encoding" && attribute.length === 0) {
-            throw Error(channel + " is encoding an attribute, but the attribute is empty");
+            throw Error(trimmedNiceChannel + " is encoding an attribute, but the attribute is empty");
+        } else if (value === "inherited" && +$("#input-level").val() === 1) {
+            throw Error(trimmedNiceChannel + " is inherited, but the level is set to 1, so there is no lower level mark to inherit it from");
         } else {
-            table.append(`<tr><td style="background-color: ${colourMap[channel]}">${channel}</td><td style="background-color: ${colourMap[channel]}">${value}</td>${value === "encoding" ? `<td style="background-color: ${colourMap[channel]}">` + attribute + "</td>" : ""}</tr>`);
+            table.append(`<tr><td style="background-color: ${colourMap[channel]}">${niceChannel}</td><td style="background-color: ${colourMap[channel]}">${value}</td>${value === "encoding" ? `<td style="background-color: ${colourMap[channel]}">` + attribute + "</td>" : ""}</tr>`);
         }
     };
 
-    $(".channel").each(function() {
+    const handleChannel = function() {
         const channel = $(this).attr("id").substring(0, $(this).attr("id").length - "-selector".length);
         if (visibleChannels.includes(channel)) {
-            attemptEncodeChannel(channel, $($(this).children()[1]).val(), $($(this).children()[3]).val().trim());
+            attemptEncodeChannel(channel, $($(this).children()[0]).html(), $($(this).children()[1]).val(), $($(this).children()[3]).val().trim());
         }
-    });
+    };
+
+    $(".channel").slice(0, 8).each(handleChannel);
+
+    attemptEncodeConstant("local layout", "Local Layout", $("#dropdown-local-layout").val());
+
+    $(".channel").slice(8).each(handleChannel);
 };
 
 const checkInputs = () => {
@@ -153,7 +166,7 @@ const checkInputs = () => {
     } else if (markType === "path") {
         visibleChannels = ["shape", "thickness", "colour"];
     } else if (markType === "point" && globalLayout === "rectilinear") {
-        visibleChannels = ["height", "width", "horizontal-position-order", "vertical-position-order", "orientation", "colour"];
+        visibleChannels = ["horizontal-position-order", "vertical-position-order"];
         if ($("#dropdown-horizontal-position-order").val() === "uniform") {
             visibleChannels.push("horizontal-order");
         }
@@ -161,16 +174,31 @@ const checkInputs = () => {
             visibleChannels.push("vertical-order");
         }
     } else if (markType === "point" && globalLayout === "polar") {
-        visibleChannels = ["spread", "span", "radial-position-order", "angular-position-order", "orientation", "colour"];
+        visibleChannels = ["radial-position-order", "angular-position-order"];
         if ($("#dropdown-radial-position-order").val() === "uniform") {
             visibleChannels.push("radial-order");
         }
         if ($("#dropdown-angular-position-order").val() === "uniform") {
             visibleChannels.push("angular-order");
         }
-    } else if (markType === "point" && globalLayout === "other") {
-        visibleChannels = ["orientation", "colour"];
     }
+    
+    const localLayout = $("#dropdown-local-layout").val();
+    if (markType === "point" && localLayout === "rectilinear") {
+        visibleChannels.push("height", "width", "orientation");
+    } else if (markType === "point" && localLayout === "polar") {
+        visibleChannels.push("spread", "span", "orientation");
+    } else if (markType === "point" && localLayout === "other") {
+        visibleChannels.push("orientation");
+    }
+
+    if (markType === "point") {
+        $("#local-layout-selector").css("display", "grid");
+        visibleChannels.push("colour", "symbol");
+    } else {
+        $("#local-layout-selector").css("display", "none");
+    }
+
 
     $(".channel").each(function() {
         const id = $(this).attr("id");
