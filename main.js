@@ -74,7 +74,7 @@ const generateCode = (visibleChannels) => {
 
 const generateTable = (visibleChannels) => {
     $("#capture").empty();
-    $("#capture").append("<table id='capture-table'></table>");
+    $("#capture").append("<table style='border-spacing: 2px;' id='capture-table'></table>");
     const table = $("#capture-table");
 
     const colourMap = {
