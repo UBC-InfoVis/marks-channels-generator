@@ -105,12 +105,14 @@ const generateTable = (visibleChannels) => {
     };
 
     ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
+
+    const baseStyle = "font-family: 'Times New Roman', Times, serif; font-weight: 400; font-size: 16px; border: 1px solid black; padding: 5px;"
     
     const attemptEncodeConstant = (encodeName, niceEncodeName, value) => {
         if (value === "unselected") {
             throw Error(niceEncodeName + " is unselected");
         } else {
-            table.append(`<tr><td style="background-color: ${colourMap[encodeName]}">${niceEncodeName}</td><td style="background-color: ${colourMap[encodeName]}">${value}</td></tr>`);
+            table.append(`<tr><td style="${baseStyle} background-color: ${colourMap[encodeName]}">${niceEncodeName}</td><td style="${baseStyle} background-color: ${colourMap[encodeName]}">${value}</td></tr>`);
         }
     };
 
@@ -120,7 +122,7 @@ const generateTable = (visibleChannels) => {
     if (markTypeOption === "unselected") {
         throw Error("mark type is unselected");
     } else {
-        table.append(`<tr><td style="background-color: ${colourMap["mark type"]}">Mark Type</td><td style="background-color: ${colourMap["mark type"]}">${markTypeOption}</td></tr>`);
+        table.append(`<tr><td style="${baseStyle} background-color: ${colourMap["mark type"]}">Mark Type</td><td style="${baseStyle} background-color: ${colourMap["mark type"]}">${markTypeOption}</td></tr>`);
     }
     attemptEncodeConstant("touching", "Touching?", $("#dropdown-touching").val());
     attemptEncodeConstant("overlapping", "Overlapping?", $("#dropdown-overlapping").val());
@@ -135,7 +137,7 @@ const generateTable = (visibleChannels) => {
         } else if (value === "inherited" && +$("#input-level").val() === 1) {
             throw Error(trimmedNiceChannel + " is inherited, but the level is set to 1, so there is no lower level mark to inherit it from");
         } else {
-            table.append(`<tr><td style="background-color: ${colourMap[channel]}">${niceChannel}</td><td style="background-color: ${colourMap[channel]}">${value}</td>${value === "encoding" ? `<td style="background-color: ${colourMap[channel]}">` + attribute + "</td>" : ""}</tr>`);
+            table.append(`<tr><td style="${baseStyle} background-color: ${colourMap[channel]}">${niceChannel}</td><td style="${baseStyle} background-color: ${colourMap[channel]}">${value}</td>${value === "encoding" ? `<td style="${baseStyle} background-color: ${colourMap[channel]}">` + attribute + "</td>" : ""}</tr>`);
         }
     };
 
