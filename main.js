@@ -124,6 +124,11 @@ const generateTable = (visibleChannels) => {
     } else {
         table.append(`<tr><td style="${baseStyle} background-color: ${colourMap["mark type"]}">Mark Type</td><td style="${baseStyle} background-color: ${colourMap["mark type"]}">${markTypeOption}</td></tr>`);
     }
+
+    if ($("#dropdown-touching").val() === "yes" && $("#dropdown-overlapping").val() === "yes") {
+        throw Error("both touching and overlapping are set to 'yes', which is not possible")
+    }
+
     attemptEncodeConstant("touching", "Touching?", $("#dropdown-touching").val());
     attemptEncodeConstant("overlapping", "Overlapping?", $("#dropdown-overlapping").val());
     attemptEncodeConstant("global layout", "Global Layout", $("#dropdown-global-layout").val());
